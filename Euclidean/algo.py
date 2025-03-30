@@ -19,3 +19,4 @@ if __name__ == "__main__":
     # multiple integers
     numbers = [56, 98, 42, 84]
     print(f"GCD of {numbers}: {gcd_multiple(numbers)}")
+    # have a nice day :)
