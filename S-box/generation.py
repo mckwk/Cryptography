@@ -1,5 +1,7 @@
 import numpy as np
 from itertools import product
+from extraction import read_sbox_file, extract_boolean_functions
+from tasks import check_balance, verify_sac
 
 def generate_linear_functions(num_variables=8):
     # Generate all 8-variable linear Boolean functions.
@@ -26,9 +28,9 @@ def calculate_nonlinearity(boolean_function, linear_functions):
     return min(hamming_distances)
 
 if __name__ == "__main__":
-    sbox_filename = "D:\Repos\Cryptography\S-box\sbox.SBX"
-    from extraction import read_sbox_file, extract_boolean_functions
+    sbox_filename = r"D:\Repos\Cryptography\S-box\sbox.SBX"
 
+    # Read S-box data and extract Boolean functions
     sbox_data = read_sbox_file(sbox_filename)
     boolean_functions = extract_boolean_functions(sbox_data)
 
@@ -39,3 +41,9 @@ if __name__ == "__main__":
     for i, boolean_function in enumerate(boolean_functions):
         nonlinearity = calculate_nonlinearity(boolean_function, linear_functions)
         print(f"Nonlinearity of Function F{i+1}: {nonlinearity}")
+
+    # Check balance of each Boolean function
+    check_balance(boolean_functions)
+
+    # Verify SAC for each Boolean function
+    verify_sac(boolean_functions)
